@@ -2,17 +2,35 @@ import React, { Component } from 'react';
 import '../stylesheets/Headquarters.css';
 import { Grid } from 'semantic-ui-react';
 import Details from './Details'
+import HostList from './HostList.js'
 
 
 class Headquarters extends Component {
-  // Remember, there's many ways to do this. This doesn't have to be a class component. It's up to you.
+
+  constructor(props){
+    super(props)
+    this.state = {
+      hosts: []
+    }
+  }
+
+  componentDidMount(){
+      fetch('http://localhost:4000/hosts')
+      .then(resp => resp.json())
+      .then(hosts => {
+        this.setState({
+          hosts: hosts
+        })
+      })
+  }
 
   render(){
+    const hosts = this.state.hosts
     return(
       <Grid celled='internally'>
         <Grid.Column width={8}>
 
-        {/* Something goes here.... */}
+        <HostList hosts={hosts}/>
 
         </Grid.Column>
         <Grid.Column width={5}>
@@ -20,7 +38,6 @@ class Headquarters extends Component {
         </Grid.Column>
         <Grid.Column width={3}>
 
-        {/* and here. Take visual cues from the screenshot/video in the Readme. */}
 
         </Grid.Column>
       </Grid>
