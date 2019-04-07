@@ -5,16 +5,11 @@ import Host from './Host.js'
 class HostList extends Component{
   constructor(props){
     super(props)
-    this.state={
-      selectedHost: 0
-    }
   }
 
-  handleClick =(id) => {
-  this.setState({
-    selectedHost: id
-  })
-  }
+    handleClickOnHostTab =(host) => {
+      this.props.handleClickOnHostTab(host)
+    }
 
   render(){
     return(
@@ -23,8 +18,8 @@ class HostList extends Component{
           return <Host
               host={thisHost}
               key={thisHost.id}
-              handleClick={this.handleClick}
-              selectedId = {this.state.selectedHost}/>
+              handleClickOnHostTab={this.handleClickOnHostTab}
+              selectedHost = {this.props.selectedHost}/>
         })}
       </Card.Group>
     )
