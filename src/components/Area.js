@@ -10,12 +10,14 @@ const Area = (props) => (
     <h3 className='labels'>{props.area.name.split('_').map(word => {
     return word.charAt(0).toUpperCase() + word.slice(1, word.length)
   }).join(' ')}</h3>
-  {props.hosts.map(host => {
-    return <Host
-      host={host} key={host.id}
-      selectedHost={props.selectedHost} handleClickOnHostTab={props.handleClickOnHostTab}/>
-    })
-  }
+<div className="area_hosts">
+      {props.hosts.map(host => {
+        return <Host
+          host={host} key={host.id}
+          selectedHost={props.selectedHost} handleClickOnHostTab={props.handleClickOnHostTab}/>
+        })
+      }
+    </div>
   </div>
 
 

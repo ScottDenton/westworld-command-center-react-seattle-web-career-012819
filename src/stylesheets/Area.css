@@ -7,6 +7,13 @@
   padding: 5px;
 }
 
+.area_hosts{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
 #high_plains {
   top: 20px;
   left: 315px;

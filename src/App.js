@@ -10,6 +10,7 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
+      areas: [],
       hosts: [],
       selectedHost: 0
     }
@@ -23,6 +24,13 @@ class App extends Component {
           hosts: hosts
         })
       })
+      fetch('http://localhost:4000/areas')
+      .then(resp => resp.json())
+      .then(areas => {
+        this.setState({
+          areas: areas
+        })
+      })
     }
 
     handleClickOnHostTab =(host) => {
@@ -30,13 +38,33 @@ class App extends Component {
         selectedHost: host
       })
     }
+
+    findHostsInArea = (areaToCount) => {
+      return this.state.hosts.filter(host => {
+        return host.area === areaToCount
+      })
+    }
+
     changeHostArea = (thisHost, newArea) =>{
-      const updatedHosts = this.state.hosts.map(host => {
-        return host.id === thisHost.id ? {...host, area: newArea} : host
-      })
-      this.setState({
-        hosts: updatedHosts
-      })
+      const areaLimit = this.state.areas.find((area) => {
+        return area.name=== newArea
+      }).limit
+
+      const hostsInThisArea = (this.findHostsInArea(newArea)).length + 1
+
+      if(hostsInThisArea <= areaLimit){
+        const updatedHosts = this.state.hosts.map(host => {
+          return host.id === thisHost.id ? {...host, area: newArea} : host
+        })
+
+        this.setState({
+          hosts: updatedHosts
+        })
+
+      } else {
+        alert("Sorry there are too many hosts in this area already")
+      }
+
     }
 
     toggleActive =(id) =>{
@@ -55,6 +83,7 @@ class App extends Component {
     return (
       <Segment id='app'>
         <WestworldMap
+          areas = {this.state.areas}
           hosts={this.state.hosts}
           selectedHost={this.state.selectedHost}
           handleClickOnHostTab={this.handleClickOnHostTab}/>

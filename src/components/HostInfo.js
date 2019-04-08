@@ -7,7 +7,7 @@ class HostInfo extends Component {
   state = {
     options: [
       {key: "High Plains", text: "High Plains", value: "high_plains"},
-      {key: "Lowands", text: "Lowands", value: "lowlands"},
+      {key: "Lowlands", text: "Lowlands", value: "lowlands"},
       {key: "Under Construction", text: "Under Construction", value: "under_construction"},
       {key: "Pariah", text: "Pariah", value: "pariah"},
       {key: "Python Pass", text: "Python Pass", value: "python_pass"},
