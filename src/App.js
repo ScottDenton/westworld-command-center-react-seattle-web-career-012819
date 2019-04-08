@@ -14,7 +14,7 @@ class App extends Component {
       areas: [],
       hosts: [],
       selectedHost: 0,
-      allActivated: false,
+      allActivated: true,
       logs: []
     }
   }

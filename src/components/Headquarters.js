@@ -12,7 +12,6 @@ class Headquarters extends Component {
     return(
       <Grid celled='internally'>
         <Grid.Column width={8}>
-
         <HostList
           hosts={this.props.hosts}
           handleClickOnHostTab={this.props.handleClickOnHostTab}

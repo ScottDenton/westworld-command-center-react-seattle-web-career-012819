@@ -22,7 +22,7 @@ const LogPanel = (props) => {
   return(
     <Segment className="HQComps" id="logPanel">
       <pre>
-        {dummyLogs().map((log, i) => <p key={i} className={log.type}>{log.msg}</p>)}
+        {dummyLogs().reverse().map((log, i) => <p key={i} className={log.type}>{log.msg}</p>)}
       </pre>
 
 
