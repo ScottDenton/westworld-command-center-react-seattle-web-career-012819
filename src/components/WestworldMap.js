@@ -23,7 +23,7 @@ class WestworldMap extends Component {
 
   render(){
   const areasToDisplay = this.state.areas.map(area => {
-    return <Area area={area} key={area.name} />
+    return <Area area={area} key={area.name} limit={area.limit} />
   })
     return (
       <Segment id="map" >
