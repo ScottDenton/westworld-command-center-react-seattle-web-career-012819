@@ -3,6 +3,7 @@ import './stylesheets/App.css'
 import { Segment } from 'semantic-ui-react';
 import WestworldMap from './components/WestworldMap.js'
 import Headquarters from './components/Headquarters.js'
+import Log from './services/Log.js'
 
 
 class App extends Component {
@@ -13,7 +14,8 @@ class App extends Component {
       areas: [],
       hosts: [],
       selectedHost: 0,
-      allActivated: false
+      allActivated: false,
+      logs: []
     }
   }
 
@@ -59,39 +61,50 @@ class App extends Component {
         })
 
         this.setState({
-          hosts: updatedHosts
+          hosts: updatedHosts,
+          logs: [...this.state.logs, Log.notify(`${thisHost.firstName} set in area ${newArea}`) ]
         })
 
       } else {
-        alert("Sorry there are too many hosts in this area already")
+        const message = Log.error(`Too many hosts. Cannot add ${thisHost.firstName} to ${newArea}`)
+        this.setState({
+          logs: [...this.state.logs, message]
+        })
       }
-
+      console.log(thisHost)
     }
 
-    toggleActive =(id) =>{
+    toggleActive =(thisHost) =>{
       const updatedHosts = this.state.hosts.map(host => {
-        return host.id === id ? {...host, active: !host.active} : host
+        return host.id === thisHost.id ? {...host, active: !host.active} : host
       })
+      let message;
+      if (!thisHost.active ? message = Log.warn(`Activated ${thisHost.firstName} `)  : message = Log.notify(`Decommisioned ${thisHost.firstName} `) )
       this.setState({
-        hosts: updatedHosts
+        hosts: updatedHosts,
+        logs: [...this.state.logs, message ]
       })
     }
 
     handleButtonClick =() => {
       let updatedHosts;
+      let message;
       if(this.state.allActivated){
          updatedHosts = this.state.hosts.map(host => {
           return {...host, active: true}
         })
+        message = Log.warn("Activating all hosts!")
 
       } else {
          updatedHosts = this.state.hosts.map(host => {
           return {...host, active: false}
         })
+        message = Log.notify("Decommissiong all hosts.")
       }
       this.setState({
         hosts: updatedHosts,
-        allActivated: !this.state.allActivated
+        allActivated: !this.state.allActivated,
+        logs: [...this.state.logs, message ]
       })
     }
 
@@ -112,7 +125,8 @@ class App extends Component {
           toggleActive={this.toggleActive}
           changeHostArea={this.changeHostArea} handleClickOnHostTab={this.handleClickOnHostTab}
           handleButtonClick={this.handleButtonClick}
-          allActivated ={this.state.allActivated}/>
+          allActivated ={this.state.allActivated}
+          logs ={this.state.logs}/>
       </Segment>
     )
   }

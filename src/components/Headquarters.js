@@ -28,7 +28,8 @@ class Headquarters extends Component {
         </Grid.Column>
         <Grid.Column width={3}>
           <LogPanel     handleButtonClick={this.props.handleButtonClick}
-          allActivated={this.props.allActivated}/>
+          allActivated={this.props.allActivated}
+          logs={this.props.logs}/>
 
         </Grid.Column>
       </Grid>

@@ -31,7 +31,7 @@ class HostInfo extends Component {
   }
 
   toggle = (id) => {
-    this.props.toggleActive(this.props.host.id)
+    this.props.toggleActive(this.props.host)
     ;
   }
 
