@@ -54,7 +54,10 @@ class App extends Component {
 
     return (
       <Segment id='app'>
-        <WestworldMap />
+        <WestworldMap
+          hosts={this.state.hosts}
+          selectedHost={this.state.selectedHost}
+          handleClickOnHostTab={this.handleClickOnHostTab}/>
         <Headquarters
           hosts={this.state.hosts}
           selectedHost ={this.state.selectedHost}
