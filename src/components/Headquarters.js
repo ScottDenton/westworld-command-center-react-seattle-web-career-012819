@@ -32,6 +32,15 @@ class Headquarters extends Component {
       })
     }
 
+    changeHostArea = (thisHost, newArea) =>{
+      const updatedHosts = this.state.hosts.map(host => {
+        return host.id === thisHost.id ? {...host, area: newArea} : host
+      })
+      this.setState({
+        hosts: updatedHosts
+      })
+    }
+
     toggleActive =(id) =>{
       const updatedHosts = this.state.hosts.map(host => {
         return host.id === id ? {...host, active: !host.active} : host
@@ -58,7 +67,8 @@ class Headquarters extends Component {
           <Details
             hosts={this.state.hosts}
             selectedHost= {this.state.selectedHost}
-            toggleActive={this.toggleActive}/>
+            toggleActive={this.toggleActive}
+            changeHostArea={this.changeHostArea}/>
         </Grid.Column>
         <Grid.Column width={3}>
 

@@ -5,22 +5,17 @@ import HostInfo from './HostInfo.js'
 
 
 const Details = (props) => {
-  // We'll render the logo if no host is selected. But if a host does get selected....
-  // Watch the video to see how this works in the app.
-
   const renderSomething = () => {
-    // console.log(props.selectedHost)
-    // console.log(props.hosts)
     const selectedHost = props.hosts.find((host)=> {
       return   host.id ===props.selectedHost.id
     })
-    console.log(selectedHost)
     if (props.selectedHost ===0){
       return <Image size='medium' src={Images.westworldLogo}/>
     } else {
       return <HostInfo
         host={selectedHost}
-        toggleActive={props.toggleActive} />
+        toggleActive={props.toggleActive}
+        changeHostArea={props.changeHostArea}/>
     }
   }
 

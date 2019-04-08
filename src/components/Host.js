@@ -3,10 +3,7 @@ import '../stylesheets/Host.css'
 import { Card } from 'semantic-ui-react'
 
 class Host extends Component {
-  constructor(props){
-    super(props)
-  }
-
+  
 handleClickOnHostTab =() => {
   this.props.handleClickOnHostTab(this.props.host)
 }

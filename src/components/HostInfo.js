@@ -5,8 +5,13 @@ import { Radio, Icon, Card, Grid, Image, Dropdown, Divider } from 'semantic-ui-r
 
 class HostInfo extends Component {
   state = {
-    options: [{key: "some_area", text: "Some Area", value: "some_area"}, {key: "another_area", text: "Another Area", value: "another_area"}],
-    value: "some_area",
+    options: [
+      {key: "High Plains", text: "High Plains", value: "high_plains"},
+      {key: "Lowands", text: "Lowands", value: "lowlands"},
+      {key: "Under Construction", text: "Under Construction", value: "under_construction"},
+      {key: "Pariah", text: "Pariah", value: "pariah"},
+      {key: "Python Pass", text: "Python Pass", value: "python_pass"},
+      {key: "Badlands", text: "Badlands", value: "badlands"}]
     // This state is just to show how the dropdown component works.
     // Options have to be formatted in this way (array of objects with keys of: key, text, value)
     // Value has to match the value in the object to render the right text.
@@ -17,6 +22,9 @@ class HostInfo extends Component {
 
 
   handleChange = (e, {value}) => {
+    e.preventDefault()
+    this.props.changeHostArea(this.props.host, value)
+
     // the 'value' attribute is given via Semantic's Dropdown component.
     // Put a debugger in here and see what the "value" variable is when you pass in different options.
     // See the Semantic docs for more info: https://react.semantic-ui.com/modules/dropdown/#usage-controlled
@@ -59,7 +67,7 @@ class HostInfo extends Component {
               Current Area:
               <Dropdown
                 onChange={this.handleChange}
-                value={this.state.value}
+                value={host.area}
                 options={this.state.options}
                 selection
               />
