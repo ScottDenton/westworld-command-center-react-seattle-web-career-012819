@@ -36,6 +36,7 @@ class App extends Component {
       })
     }
 
+    // record which host is clicked on
     handleClickOnHostTab =(host) => {
       this.setState({
         selectedHost: host
@@ -49,35 +50,40 @@ class App extends Component {
     }
 
     changeHostArea = (thisHost, newArea) =>{
+      //find the current areasLimit
       const areaLimit = this.state.areas.find((area) => {
         return area.name=== newArea
       }).limit
 
+      //find hosts in the area being changed into
       const hostsInThisArea = (this.findHostsInArea(newArea)).length + 1
 
+      //if space in area move host over
       if(hostsInThisArea <= areaLimit){
         const updatedHosts = this.state.hosts.map(host => {
           return host.id === thisHost.id ? {...host, area: newArea} : host
         })
-
         this.setState({
           hosts: updatedHosts,
           logs: [...this.state.logs, Log.notify(`${thisHost.firstName} set in area ${newArea}`) ]
         })
-
-      } else {
+      }
+      // if no space throw an error and add it to the logs
+      else {
         const message = Log.error(`Too many hosts. Cannot add ${thisHost.firstName} to ${newArea}`)
         this.setState({
           logs: [...this.state.logs, message]
         })
       }
-      console.log(thisHost)
     }
 
     toggleActive =(thisHost) =>{
+      //new data to be passed in when state is updated
       const updatedHosts = this.state.hosts.map(host => {
         return host.id === thisHost.id ? {...host, active: !host.active} : host
       })
+
+      // add the correct log depending if host is active or not
       let message;
       if (!thisHost.active ? message = Log.warn(`Activated ${thisHost.firstName} `)  : message = Log.notify(`Decommisioned ${thisHost.firstName} `) )
       this.setState({
@@ -86,15 +92,16 @@ class App extends Component {
       })
     }
 
+    //activate or decommission all hosts
     handleButtonClick =() => {
       let updatedHosts;
       let message;
+      //set appropriate list of hosts and log message
       if(this.state.allActivated){
          updatedHosts = this.state.hosts.map(host => {
           return {...host, active: true}
         })
         message = Log.warn("Activating all hosts!")
-
       } else {
          updatedHosts = this.state.hosts.map(host => {
           return {...host, active: false}
@@ -111,7 +118,6 @@ class App extends Component {
 
 
   render(){
-
     return (
       <Segment id='app'>
         <WestworldMap

@@ -2,8 +2,7 @@ import React,{ Component} from 'react';
 import '../stylesheets/Host.css'
 import { Card } from 'semantic-ui-react'
 
-class Host extends Component {
-  
+export default class Host extends Component {
 handleClickOnHostTab =() => {
   this.props.handleClickOnHostTab(this.props.host)
 }
@@ -18,18 +17,4 @@ handleClickOnHostTab =() => {
         />
     )
   }
-
-
 }
-
-export default Host
-
-
-
-
-
-// handleClick =() => {
-//   this.setState({
-//     selected: !this.state.selected
-//   })
-// }

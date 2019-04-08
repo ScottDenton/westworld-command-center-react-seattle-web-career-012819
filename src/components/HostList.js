@@ -2,11 +2,10 @@ import React,{Component} from 'react'
 import { Card } from 'semantic-ui-react'
 import Host from './Host.js'
 
-class HostList extends Component{
-
-    handleClickOnHostTab =(host) => {
-      this.props.handleClickOnHostTab(host)
-    }
+export default class HostList extends Component{
+  handleClickOnHostTab =(host) => {
+    this.props.handleClickOnHostTab(host)
+  }
 
   render(){
     const decommissionedHosts = this.props.hosts.filter(host => {
@@ -23,8 +22,5 @@ class HostList extends Component{
         })}
       </Card.Group>
     )
-
   }
 }
-
-export default HostList

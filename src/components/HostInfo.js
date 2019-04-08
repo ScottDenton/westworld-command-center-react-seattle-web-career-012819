@@ -2,8 +2,7 @@ import '../stylesheets/HostInfo.css'
 import React, { Component } from 'react'
 import { Radio, Icon, Card, Grid, Image, Dropdown, Divider } from 'semantic-ui-react'
 
-
-class HostInfo extends Component {
+export default class HostInfo extends Component {
   state = {
     options: [
       {key: "High Plains", text: "High Plains", value: "high_plains"},
@@ -12,27 +11,17 @@ class HostInfo extends Component {
       {key: "Pariah", text: "Pariah", value: "pariah"},
       {key: "Python Pass", text: "Python Pass", value: "python_pass"},
       {key: "Badlands", text: "Badlands", value: "badlands"}]
-    // This state is just to show how the dropdown component works.
-    // Options have to be formatted in this way (array of objects with keys of: key, text, value)
-    // Value has to match the value in the object to render the right text.
-
-    // IMPORTANT: But whether it should be stateful or not is entirely up to you. Change this component however you like.
   }
 
-
-
+  // handles change in hosts area
   handleChange = (e, {value}) => {
     e.preventDefault()
     this.props.changeHostArea(this.props.host, value)
-
-    // the 'value' attribute is given via Semantic's Dropdown component.
-    // Put a debugger in here and see what the "value" variable is when you pass in different options.
-    // See the Semantic docs for more info: https://react.semantic-ui.com/modules/dropdown/#usage-controlled
   }
 
+  //toggle host active/decommissioned
   toggle = (id) => {
     this.props.toggleActive(this.props.host)
-    ;
   }
 
   render(){
@@ -47,12 +36,12 @@ class HostInfo extends Component {
             className="hostImg"
           />
         </Grid.Column>
+
         <Grid.Column width={10}>
           <Card>
             <Card.Content>
               <Card.Header>
                 {host.firstName} | { host.gender ==='Male' ? <Icon name='man' /> : <Icon name='woman' />}
-
               </Card.Header>
               <Card.Meta>
                 <Radio
@@ -78,5 +67,3 @@ class HostInfo extends Component {
     )
   }
 }
-
-export default HostInfo

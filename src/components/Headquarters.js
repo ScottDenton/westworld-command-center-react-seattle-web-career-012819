@@ -12,24 +12,28 @@ class Headquarters extends Component {
     return(
       <Grid celled='internally'>
         <Grid.Column width={8}>
-        <HostList
-          hosts={this.props.hosts}
-          handleClickOnHostTab={this.props.handleClickOnHostTab}
-          selectedHost={this.props.selectedHost}/>
-
+          <HostList
+            hosts={this.props.hosts}
+            handleClickOnHostTab={this.props.handleClickOnHostTab}
+            selectedHost={this.props.selectedHost}
+          />
         </Grid.Column>
+
         <Grid.Column width={5}>
           <Details
             hosts={this.props.hosts}
             selectedHost= {this.props.selectedHost}
             toggleActive={this.props.toggleActive}
-            changeHostArea={this.props.changeHostArea}/>
+            changeHostArea={this.props.changeHostArea}
+          />
         </Grid.Column>
-        <Grid.Column width={3}>
-          <LogPanel     handleButtonClick={this.props.handleButtonClick}
-          allActivated={this.props.allActivated}
-          logs={this.props.logs}/>
 
+        <Grid.Column width={3}>
+          <LogPanel
+            handleButtonClick={this.props.handleButtonClick}
+            allActivated={this.props.allActivated}
+            logs={this.props.logs}
+          />
         </Grid.Column>
       </Grid>
     )
