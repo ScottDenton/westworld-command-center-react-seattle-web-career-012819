@@ -12,7 +12,8 @@ class App extends Component {
     this.state = {
       areas: [],
       hosts: [],
-      selectedHost: 0
+      selectedHost: 0,
+      allActivated: false
     }
   }
 
@@ -76,6 +77,24 @@ class App extends Component {
       })
     }
 
+    handleButtonClick =() => {
+      let updatedHosts;
+      if(this.state.allActivated){
+         updatedHosts = this.state.hosts.map(host => {
+          return {...host, active: true}
+        })
+
+      } else {
+         updatedHosts = this.state.hosts.map(host => {
+          return {...host, active: false}
+        })
+      }
+      this.setState({
+        hosts: updatedHosts,
+        allActivated: !this.state.allActivated
+      })
+    }
+
 
 
   render(){
@@ -91,7 +110,9 @@ class App extends Component {
           hosts={this.state.hosts}
           selectedHost ={this.state.selectedHost}
           toggleActive={this.toggleActive}
-          changeHostArea={this.changeHostArea} handleClickOnHostTab={this.handleClickOnHostTab}/>
+          changeHostArea={this.changeHostArea} handleClickOnHostTab={this.handleClickOnHostTab}
+          handleButtonClick={this.handleButtonClick}
+          allActivated ={this.state.allActivated}/>
       </Segment>
     )
   }

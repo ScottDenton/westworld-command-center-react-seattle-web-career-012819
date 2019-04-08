@@ -3,6 +3,7 @@ import '../stylesheets/Headquarters.css';
 import { Grid } from 'semantic-ui-react';
 import Details from './Details'
 import HostList from './HostList.js'
+import LogPanel from './LogPanel.js'
 
 
 class Headquarters extends Component {
@@ -26,7 +27,8 @@ class Headquarters extends Component {
             changeHostArea={this.props.changeHostArea}/>
         </Grid.Column>
         <Grid.Column width={3}>
-
+          <LogPanel     handleButtonClick={this.props.handleButtonClick}
+          allActivated={this.props.allActivated}/>
 
         </Grid.Column>
       </Grid>
